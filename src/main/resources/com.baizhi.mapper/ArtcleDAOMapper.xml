@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.ArtcleDao">
+
+    <!--查所有-->
+    <select id="findAll" resultType="Artcle">
+        select * from artcle
+    </select>
+    <!--分页查询-->
+    <select id="findByPage" resultType="Artcle">
+        select * from artcle limit #{start},#{rows}
+    </select>
+    <select id="findTotals" resultType="long">
+        select count(id) from artcle
+    </select>
+
+</mapper>

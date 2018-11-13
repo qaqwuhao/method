@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.AlbumDao">
+    <resultMap id="map" type="Album">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="author" column="author"/>
+        <result property="broadcast" column="broadcast"/>
+        <result property="number" column="number"/>
+        <result property="content" column="content"/>
+        <result property="date" column="date"/>
+        <result property="pictre" column="pictre"/>
+        <result property="score" column="score"/>
+        <result property="star" column="star"/>
+        <collection property="children" ofType="Section">
+            <result property="id" column="aid"/>
+            <result property="name" column="aname"/>
+            <result property="siza" column="asiza"/>
+            <result property="downlad" column="adownlad"/>
+            <result property="duration" column="aduration"/>
+            <result property="date" column="adate"/>
+        </collection>
+    </resultMap>
+    <select id="findByPage"  resultMap="map">
+        select b.id,b.name,b.author,b.broadcast,b.number,b.content,b.date,b.pictre,b.score,b.star,
+    a.id aid,a.name aname,a.siza asiza,a.downlad adownlad,a.duration aduration,a.date adate from Album b
+    left join section a  on b.id=a.album_id limit #{start},#{rows}
+    </select>
+    <select id="findTotals" resultType="long">
+        select count(id) from album
+    </select>
+    <!--添加-->
+    <insert id="add" parameterType="Carousel">
+        insert into album(id,album.name,author,broadcast,album.number,content,album.date,pictre,score,star) values (#{id},#{name},#{author},#{broadcast},#{number},#{content},#{date},#{pictre},#{score},#{star})
+    </insert>
+
+
+
+</mapper>

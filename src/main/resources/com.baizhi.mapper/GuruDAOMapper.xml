@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.GuruDao">
+
+    <!--查所有-->
+    <select id="findAll" resultType="Guru">
+        select * from guru
+    </select>
+    <!--分页查询-->
+    <select id="findByPage" resultType="Guru">
+        select id,name,guru.status,head from guru limit #{start},#{rows}
+    </select>
+    <select id="findTotals" resultType="long">
+        select count(id) from guru
+    </select>
+    <!--删除-->
+    <delete id="delete" parameterType="String">
+        delete from guru where id=#{id}
+    </delete>
+    <!--添加-->
+    <insert id="add" parameterType="Guru">
+        insert into guru(id,guru.name,guru.status,head) values (#{id},#{name},#{status},#{head})
+    </insert>
+
+    <!--根据id查-->
+    <select id="findAllone" parameterType="String" resultType="Guru">
+        select * from guru where id=#{id}
+    </select>
+    <!--修改-->
+    <update id="update" parameterType="Guru">
+        update guru set name=#{name},status=#{status},head=#{head}  where id=#{id}
+    </update>
+</mapper>

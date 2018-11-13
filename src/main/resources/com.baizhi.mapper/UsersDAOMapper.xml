@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UsersDao">
+
+    <!--查所有-->
+    <select id="findAll" resultType="com.baizhi.entity.Users">
+        select * from users
+    </select>
+    <!--分页查询-->
+    <select id="findByPage" resultType="com.baizhi.entity.Users">
+        select * from users limit #{start},#{rows}
+    </select>
+    <select id="findTotals" resultType="long">
+        select count(id) from users
+    </select>
+
+
+    <!--删除-->
+    <delete id="delete" parameterType="String">
+
+    </delete>
+
+    <!--添加-->
+    <insert id="add" parameterType="com.baizhi.entity.Users">
+        insert into users values (#{id},#{name},#{password},#{phone},#{address},#{rename},#{sex},#{date}
+        ,#{signaure},#{head},#{staus})
+    </insert>
+
+    <!--根据id查-->
+    <select id="findAllone" parameterType="String" resultType="com.baizhi.entity.Users">
+    select * from users where id=#{id}
+    </select>
+    <!--修改-->
+    <update id="update" parameterType="com.baizhi.entity.Users">
+        update users set name=#{name},password=#{password},phone=#{phone},address=#{address},rename=#{rename},sex=#{sex},date=#{date}
+                ,signaure=#{signaure},head=#{head},staus=#{staus}  where id=#{id}
+    </update>
+
+    <select id="login" resultType="com.baizhi.entity.Users" parameterType="com.baizhi.entity.Users">
+        select * from users where name=#{name} and password=#{password}
+    </select>
+</mapper>
